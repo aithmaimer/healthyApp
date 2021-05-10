@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:healthy_app/pallete.dart';
 import 'package:healthy_app/widgets/widgets.dart';
 
@@ -49,11 +48,32 @@ class ForgotPassword extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    TextInputField(
-                      icon: FontAwesomeIcons.envelope,
-                      hint: 'Email',
-                      inputType: TextInputType.emailAddress,
-                      inputAction: TextInputAction.done,
+                    Container(
+                      height: size.height * 0.08,
+                      width: size.width * 0.8,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[500].withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          prefixIcon: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Icon(
+                              Icons.person,
+                              size: 28,
+                              color: kWhite,
+                            ),
+                          ),
+                          hintText: "Email",
+                          hintStyle: kBodyText,
+                        ),
+                        style: kBodyText,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                      ),
                     ),
                     SizedBox(
                       height: 20,
