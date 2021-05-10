@@ -27,14 +27,14 @@ class CreateNewAccount extends StatelessWidget {
           if (e.code == 'weak-password') {
             Alert(context: context, title: "The password provided is too weak.")
                 .show();
-            print("The password provided is too weak.");
+           
           } else if (e.code == 'email-already-in-use') {
             Alert(
                     context: context,
                     title: "The account already exists for that email.")
                 .show();
 
-            print("The account already exists for that email.");
+           
           }
         } catch (e) {
           print(e);
@@ -79,23 +79,7 @@ class CreateNewAccount extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Positioned(
-                              top: size.height * 0.08,
-                              left: size.width * 0.56,
-                              child: Container(
-                                height: size.width * 0.1,
-                                width: size.width * 0.1,
-                                decoration: BoxDecoration(
-                                  color: kBlue,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: kWhite, width: 2),
-                                ),
-                                child: Icon(
-                                  FontAwesomeIcons.arrowUp,
-                                  color: kWhite,
-                                ),
-                              ),
-                            )
+                            
                           ],
                         ),
                         SizedBox(
@@ -282,7 +266,7 @@ class CreateNewAccount extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                                 color: kBlue,
                               ),
-                              child: RaisedButton(
+                              child: FlatButton(
                                 onPressed: () async {
                                   UserCredential response = await signUp();
                                   print("===================");
