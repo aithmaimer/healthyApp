@@ -282,7 +282,7 @@ class CreateNewAccount extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                                 color: kBlue,
                               ),
-                              child: RaisedButton(
+                              child: FlatButton(
                                 onPressed: () async {
                                   UserCredential response = await signUp();
                                   print("===================");
