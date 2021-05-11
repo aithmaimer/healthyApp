@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/authentification/authentification.dart';
+import 'package:healthy_app/screens/firstpage.dart';
 import 'package:healthy_app/screens/home.dart';
 
 void main() async {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginScreen(),
         'ForgotPassword': (context) => ForgotPassword(),
         'CreateNewAccount': (context) => CreateNewAccount(),
+        'firstPage': (context) => FirstPage(),
         'homeScreen': (context) => Home(),
       },
     );
