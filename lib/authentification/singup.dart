@@ -11,6 +11,7 @@ class CreateNewAccount extends StatelessWidget {
   final _passworldControler = new TextEditingController();
   final _confirmePassworldControler = new TextEditingController();
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
+  User user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -22,6 +23,11 @@ class CreateNewAccount extends StatelessWidget {
           UserCredential userCredential = await FirebaseAuth.instance
               .createUserWithEmailAndPassword(
                   email: myemail, password: myPassworld);
+          await user.sendEmailVerification();
+          Alert(
+                  context: context,
+                  title: "Your verification email has been sent")
+              .show();
           return userCredential;
         } on FirebaseAuthException catch (e) {
           if (e.code == 'weak-password') {

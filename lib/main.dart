@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/authentification/authentification.dart';
+import 'package:healthy_app/screens/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginScreen(),
         'ForgotPassword': (context) => ForgotPassword(),
         'CreateNewAccount': (context) => CreateNewAccount(),
+        'homeScreen': (context) => Home(),
       },
     );
   }
