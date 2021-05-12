@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/pallete.dart';
+import 'package:healthy_app/screens/firstpage.dart';
 import 'package:healthy_app/widgets/widgets.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -21,11 +22,11 @@ class LoginScreen extends StatelessWidget {
               .signInWithEmailAndPassword(
                   email: myemail, password: myPassworld);
           if (auth.currentUser.emailVerified == false) {
-            print(user.emailVerified);
             Alert(context: context, title: "Please verify your email first")
                 .show();
           } else
-            Navigator.of(context).pushNamed("homeScreen");
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => FirstPage()));
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
             Alert(context: context, title: "No user found for that email.")
@@ -56,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                 Flexible(
                   child: Center(
                     child: Text(
-                      'maladie',
+                      'CancerHelp',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 60,
