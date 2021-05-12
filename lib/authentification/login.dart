@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/pallete.dart';
+import 'package:healthy_app/screens/firstpage.dart';
 import 'package:healthy_app/widgets/widgets.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -24,7 +25,8 @@ class LoginScreen extends StatelessWidget {
             Alert(context: context, title: "Please verify your email first")
                 .show();
           } else
-            Navigator.of(context).pushNamed("firstPage");
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => FirstPage()));
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
             Alert(context: context, title: "No user found for that email.")

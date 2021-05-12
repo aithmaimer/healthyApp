@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:healthy_app/authentification/authentification.dart';
 import 'package:healthy_app/screens/firstpage.dart';
 import 'package:healthy_app/screens/home.dart';
+import 'package:healthy_app/classes/docier_medicale.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         'CreateNewAccount': (context) => CreateNewAccount(),
         'firstPage': (context) => FirstPage(),
         'homeScreen': (context) => Home(),
+        'DocierMedicale': (context) => DocierMedicale(),
       },
     );
   }

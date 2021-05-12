@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/authentification/login.dart';
 
@@ -30,25 +31,23 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           Container(
-              height: 60,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
-                },
-                child: Text(
-                  "Logout",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 18,
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-              )),
+              child: RaisedButton(
+            color: Colors.blue,
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
+            },
+            child: Text(
+              "Logout",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: 18,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          )),
         ],
       ),
     );

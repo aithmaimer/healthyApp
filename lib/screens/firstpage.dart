@@ -293,8 +293,7 @@ class FirstPage extends StatelessWidget {
                 primary: Colors.white,
               ),
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
+                Navigator.pushReplacementNamed(context, "DocierMedicale");
               },
               child: Text(
                 "Let's go",
