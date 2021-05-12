@@ -11,12 +11,13 @@ class _DocierMedicaleState extends State<DocierMedicale> {
   String nom, prenom, dateNaissance, groupSanguin, adresse;
   double tele, poid, taille;
   final auth = FirebaseAuth.instance;
-  DateTime pickeDate;
+  //DateTime pickeDate;
+  DateTime _dateTime;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    pickeDate = DateTime.now();
+   
   }
 
   @override
@@ -54,13 +55,22 @@ class _DocierMedicaleState extends State<DocierMedicale> {
                 },
               ),
             ),
-            Padding(
+           Padding(
                 padding: const EdgeInsets.all(1.0),
-                child: ListTile(
-                  leading: Icon(Icons.date_range_outlined),
-                  title: Text("Date De Naissance"),
-                  onTap: _pickdate,
-                )),
+               child:
+                  RaisedButton(
+                  child: Text('date de naissance'),
+                  onPressed: (){
+                    showDatePicker(context: context,
+                     initialDate: DateTime.now(),
+                      firstDate: DateTime(2001),
+                       lastDate: DateTime(2222)
+                       );
+                  },
+                
+              )
+                ),
+            
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
@@ -155,20 +165,9 @@ class _DocierMedicaleState extends State<DocierMedicale> {
               ),
             )),
       ),
+      
     );
   }
 
-  _pickdate() async {
-    DateTime date = await showDatePicker(
-      context: context,
-      initialDate: pickeDate,
-      firstDate: DateTime(DateTime.now().year - 90),
-      lastDate: DateTime(DateTime.now().year),
-    );
-    if (date != null) {
-      setState(() {
-        pickeDate = date;
-      });
-    }
-  }
+ 
 }
