@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:healthy_app/authentification/authentification.dart';
 import 'package:healthy_app/screens/addContact.dart';
+import 'package:healthy_app/screens/editContact.dart';
 import './Home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -70,6 +71,26 @@ class ListContactState extends State<ListContact> {
               return new ListView(
                 children: snapshot.data.docs.map((document) {
                   return new ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditContact(document),
+                          ));
+                    },
+                    /* leading: IconButton(
+                     
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        print("======================");
+                        print(document.id);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditContact(document),
+                            ));
+                      },
+                    ),*/
                     title: new Text(document["name"]),
                     subtitle: new Text(document["mobile"]),
                   );
