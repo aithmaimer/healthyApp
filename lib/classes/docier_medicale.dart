@@ -11,13 +11,19 @@ class _DocierMedicaleState extends State<DocierMedicale> {
   String nom, prenom, dateNaissance, groupSanguin, adresse;
   double tele, poid, taille;
   final auth = FirebaseAuth.instance;
-  //DateTime pickeDate;
   DateTime _dateTime;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-   
+    _dateTime = DateTime.now();
+  }
+
+  String dropval;
+  void dropChange(String val) {
+    setState(() {
+      dropval = val;
+    });
   }
 
   @override
@@ -55,36 +61,41 @@ class _DocierMedicaleState extends State<DocierMedicale> {
                 },
               ),
             ),
-           Padding(
-                padding: const EdgeInsets.all(1.0),
-               child:
-                  RaisedButton(
-                  child: Text('date de naissance'),
-                  onPressed: (){
-                    showDatePicker(context: context,
-                     initialDate: DateTime.now(),
-                      firstDate: DateTime(2001),
-                       lastDate: DateTime(2222)
-                       );
-                  },
-                
-              )
-                ),
-            
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                obscureText: false,
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(hintText: 'Group sanguin'),
-                onChanged: (value) {
-                  setState(() {
-                    groupSanguin = value.trim();
-                  });
-                },
-              ),
-            ),
+                padding: const EdgeInsets.all(1.0),
+                child: TextFormField(
+                  readOnly: true,
+                  decoration: InputDecoration(
+                      hintText:
+                          "Date Naissace: ${_dateTime.day}/${_dateTime.month}/${_dateTime.year}",
+                      suffixIcon: Icon(Icons.date_range_outlined)),
+                  onTap: () async {
+                    DateTime date = await showDatePicker(
+                        context: context,
+                        initialDate: _dateTime,
+                        firstDate: DateTime(1930),
+                        lastDate: DateTime(2022));
+                    if (date != null)
+                      setState(() {
+                        _dateTime = date;
+                      });
+                    print(
+                        "${_dateTime.day}/${_dateTime.month}/${_dateTime.year}");
+                  },
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DropdownButtonFormField(
+                    hint: Text("Groupe sanguin"),
+                    onChanged: dropChange,
+                    value: dropval,
+                    items: <String>["A+", "A-", "O+"]
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        child: Text(value),
+                        value: value,
+                      );
+                    }).toList())),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
@@ -103,7 +114,7 @@ class _DocierMedicaleState extends State<DocierMedicale> {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 obscureText: false,
-                keyboardType: TextInputType.visiblePassword,
+                keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(hintText: 'Numero Telephone'),
                 onChanged: (value) {
@@ -165,9 +176,6 @@ class _DocierMedicaleState extends State<DocierMedicale> {
               ),
             )),
       ),
-      
     );
   }
-
- 
 }

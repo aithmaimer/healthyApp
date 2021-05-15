@@ -31,7 +31,10 @@ dependencies:
   font_awesome_flutter: ^9.0.0
   #google_fonts: ^1.1.1
   firebase_auth: ^1.1.3
-  cloud_firestore: ^2.0.0
+  cloud_firestore: ^2.1.0
+  #firestore_ui: ^1.20.0
+  #firebase_auth: any
+  #cloud_firestore: any
   awesome_dialog: ^2.0.0
   rflutter_alert: ^2.0.2
 
