@@ -86,8 +86,7 @@ class MenuDrawer extends StatelessWidget {
             color: Colors.blue,
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()));
+              Navigator.pushNamed(context, '/');
             },
             child: Text(
               "Logout",

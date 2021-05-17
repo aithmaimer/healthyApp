@@ -21,12 +21,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'maladie',
       debugShowCheckedModeBanner: false,
-      /*theme: ThemeData(
-        textTheme:
-            GoogleFonts.josefinSansTextTheme(Theme.of(context).textTheme),
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),*/
       initialRoute: '/',
       routes: {
         '/': (context) => LoginScreen(),
