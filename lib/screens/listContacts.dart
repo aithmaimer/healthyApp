@@ -78,19 +78,6 @@ class ListContactState extends State<ListContact> {
                             builder: (context) => EditContact(document),
                           ));
                     },
-                    /* leading: IconButton(
-                     
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        print("======================");
-                        print(document.id);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditContact(document),
-                            ));
-                      },
-                    ),*/
                     title: new Text(document["name"]),
                     subtitle: new Text(document["mobile"]),
                   );

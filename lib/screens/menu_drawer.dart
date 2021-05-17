@@ -1,6 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/authentification/login.dart';
+import 'package:healthy_app/screens/food.dart';
+import 'package:healthy_app/screens/listContacts.dart';
+
+import 'information.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -31,7 +35,54 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           Container(
-              child: RaisedButton(
+              height: 50,
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ListContact(),
+                      ));
+                },
+                title: Text("Contacts"),
+                leading: Icon(
+                  Icons.group,
+                  color: Colors.lightBlueAccent,
+                ),
+              )),
+          Container(
+              height: 50,
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Information(),
+                      ));
+                },
+                title: Text("informations"),
+                leading: Icon(
+                  Icons.group,
+                  color: Colors.lightBlueAccent,
+                ),
+              )),
+          Container(
+              height: 50,
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FoodPage(),
+                      ));
+                },
+                title: Text("Repas"),
+                leading: Icon(
+                  Icons.group,
+                  color: Colors.lightBlueAccent,
+                ),
+              )),
+          RaisedButton(
             color: Colors.blue,
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
@@ -47,7 +98,7 @@ class MenuDrawer extends StatelessWidget {
                 decoration: TextDecoration.none,
               ),
             ),
-          )),
+          ),
         ],
       ),
     );

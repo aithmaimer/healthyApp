@@ -6,7 +6,6 @@ import 'package:healthy_app/screens/home.dart';
 import 'package:healthy_app/screens/listContacts.dart';
 
 class EditContact extends StatefulWidget {
-  @override
   DocumentSnapshot document;
   EditContact(this.document);
   State<StatefulWidget> createState() {
@@ -49,13 +48,6 @@ class EditContactState extends State<EditContact> {
   updateData(data, docid) async {
     FirebaseFirestore.instance.collection('contacts').doc(docid).set(data);
   }
-/*
-  removeContact(docid) async {
-    FirebaseFirestore.instance.collection('contacts').doc(docid).delete();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => ListContact()));
-  }
-  */
 
   editContact() {
     if (formState.currentState.validate()) {
@@ -88,7 +80,6 @@ class EditContactState extends State<EditContact> {
         title: Text('Modifier Contact'),
         actions: <Widget>[
           FlatButton(
-            //  color: Colors.white,
             child: Text('SignOut'),
             onPressed: _signout,
           )

@@ -57,6 +57,12 @@ flutter:
   assets:
     - images/login2.jpg
     - images/profile.jpg
+    - images/plate1.png
+    - images/plate2.png
+    - images/plate3.png
+    - images/plate4.png
+    - images/plate5.png
+    - images/plate6.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

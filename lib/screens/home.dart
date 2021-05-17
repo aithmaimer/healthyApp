@@ -9,10 +9,10 @@ class Home extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "my list Viwe",
         home: Scaffold(
-            appBar: AppBar(
-              title: Text("Home Page"),
-            ),
-            drawer: MenuDrawer(),
-           ));
+          appBar: AppBar(
+            title: Text("Home Page"),
+          ),
+          drawer: MenuDrawer(),
+        ));
   }
 }
