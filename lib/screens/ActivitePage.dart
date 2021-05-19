@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_app/screens/detailActivitePage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:healthy_app/screens/home.dart';
+
+import 'detailActivitePage.dart';
+
+
 
 class ActivitePage extends StatefulWidget {
   @override
@@ -10,6 +15,11 @@ class ActivitePage extends StatefulWidget {
 class _ActivitePageState extends State<ActivitePage> {
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
+
+    Query<Map<String, dynamic>> activ =
+        FirebaseFirestore.instance.collection('activite');
+
     return Scaffold(
       backgroundColor: Color(0xFF21BFBD),
       body: ListView(
@@ -27,24 +37,6 @@ class _ActivitePageState extends State<ActivitePage> {
                         MaterialPageRoute(builder: (context) => Home()));
                   },
                 ),
-                Container(
-                  width: 125.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.filter_list),
-                        color: Colors.white,
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.menu),
-                        color: Colors.white,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -55,19 +47,21 @@ class _ActivitePageState extends State<ActivitePage> {
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
               children: <Widget>[
-                Text(
-                  'Restaurant',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25.0),
+                Center(
+                  child: Text(
+                    'Activités',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0),
+                  ),
                 ),
                 SizedBox(
                   width: 10.0,
                 ),
                 Text(
-                  'Food',
+                  'physiques',
                   style: TextStyle(
                       fontFamily: 'Montserrat',
                       color: Colors.white,
@@ -85,82 +79,83 @@ class _ActivitePageState extends State<ActivitePage> {
                 color: Colors.white,
                 borderRadius:
                     BorderRadius.only(topLeft: Radius.circular(65.0))),
-            child: ListView(
-              // primary: false,
-              padding: EdgeInsets.only(left: 25.0, right: 25.0),
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 5.0),
-                  height: MediaQuery.of(context).size.height - 300,
-                  child: ListView(
-                    children: <Widget>[
-                      _bulidFoodItem('images/plate1.png', "Pâté de maquereau ",
-                          "images/ingridiant1.jpeg"),
-                      _bulidFoodItem('images/plate2.png', "Soupe de poisson",
-                          "images/ingridiant2.jpeg"),
-                      _bulidFoodItem('images/plate3.png', "Poulet aux fruits",
-                          "images/ingridiant3.jpeg"),
-                      _bulidFoodItem(
-                          'images/plate4.png', "dish 4", "images/plate1.png"),
-                      _bulidFoodItem(
-                          'images/plate5.png', "dish 5", "images/plate1.png"),
-                      _bulidFoodItem(
-                          'images/plate6.png', "dish 6", "images/plate1.png"),
-                    ],
-                  ),
-                ),
-                //  )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
+            child: StreamBuilder<QuerySnapshot>(
+              stream: activ.snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text("No data found");
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else {
+                  return Container(
+                    padding: EdgeInsets.only(top: 10.0),
+                    height: MediaQuery.of(context).size.height - 300,
+                    child: new ListView(
+                      children: snapshot.data.docs.map((document) {
+                        print(document['image']);
 
-  Widget _bulidFoodItem(String imgPath, String foodName, String ingrediant) {
-    return Container(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  DetailActivitePage(imgPath, foodName, ingrediant)));
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Hero(
-                    tag: imgPath,
-                    child: Image(
-                        image: AssetImage(imgPath),
-                        fit: BoxFit.cover,
-                        height: 75.0,
-                        width: 75.0),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        foodName,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 17.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                        return new Container(
+                          padding: EdgeInsets.only(
+                              left: 10.0, right: 10.0, top: 10.0),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DetailActivitePage(document),
+                                  ));
+                              print(document.id);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Container(
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        height: 75.0,
+                                        width: 75.0,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    document['image']),
+                                                fit: BoxFit.cover)),
+                                      ),
+                                      SizedBox(
+                                        width: 10.0,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            document['nom'],
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                }
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

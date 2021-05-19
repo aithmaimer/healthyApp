@@ -1,20 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DetailActivitePage extends StatefulWidget {
-  final heroTag;
-  final foodName;
-  final ingridinat;
-
-  DetailActivitePage(this.heroTag, this.foodName, this.ingridinat);
+  DocumentSnapshot document;
+  DetailActivitePage(this.document);
 
   @override
   _DetailActivitePageState createState() => _DetailActivitePageState();
 }
 
 class _DetailActivitePageState extends State<DetailActivitePage> {
-  var selectedCard = 'WEIGHT';
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -68,11 +64,12 @@ class _DetailActivitePageState extends State<DetailActivitePage> {
               top: 30,
               left: (MediaQuery.of(context).size.width / 2) - 100,
               child: Hero(
-                tag: widget.heroTag,
+                tag: widget.document["image"],
                 child: Container(
                   decoration: BoxDecoration(
+                      shape: BoxShape.circle,
                       image: DecorationImage(
-                          image: AssetImage(widget.heroTag),
+                          image: NetworkImage(widget.document["image"]),
                           fit: BoxFit.cover)),
                 ),
               ),
@@ -88,7 +85,7 @@ class _DetailActivitePageState extends State<DetailActivitePage> {
                 children: <Widget>[
                   Center(
                     child: Text(
-                      widget.foodName,
+                      widget.document["nom"],
                       style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 22,
@@ -115,7 +112,9 @@ class _DetailActivitePageState extends State<DetailActivitePage> {
                     decoration: BoxDecoration(
                         //  shape: BoxShape.circle,
                         image: DecorationImage(
-                            image: AssetImage(widget.ingridinat),
+                            image: NetworkImage(
+                              widget.document["detail"],
+                            ),
                             fit: BoxFit.fill)),
                   ),
                   SizedBox(
