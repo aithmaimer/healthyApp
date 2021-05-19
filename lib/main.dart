@@ -4,7 +4,7 @@ import 'package:healthy_app/authentification/authentification.dart';
 import 'package:healthy_app/screens/addContact.dart';
 import 'package:healthy_app/screens/firstpage.dart';
 import 'package:healthy_app/screens/home.dart';
-import 'package:healthy_app/classes/docier_medicale.dart';
+import 'package:healthy_app/screens/AddDocierMedicale.dart';
 import 'package:healthy_app/classes/contact.dart';
 import 'package:healthy_app/screens/listContacts.dart';
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         'CreateNewAccount': (context) => CreateNewAccount(),
         'firstPage': (context) => FirstPage(),
         'homeScreen': (context) => Home(),
-        'DocierMedicale': (context) => DocierMedicale(),
+        'AddDocierMedicale': (context) => AddDocierMedicale(),
         'ListContact': (context) => ListContact(),
       },
     );

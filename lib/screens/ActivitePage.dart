@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_app/screens/detailFoodPage.dart';
+import 'package:healthy_app/screens/detailActivitePage.dart';
 import 'package:healthy_app/screens/home.dart';
 
-class FoodPage extends StatefulWidget {
+class ActivitePage extends StatefulWidget {
   @override
-  _FoodPageState createState() => _FoodPageState();
+  _ActivitePageState createState() => _ActivitePageState();
 }
 
-class _FoodPageState extends State<FoodPage> {
+class _ActivitePageState extends State<ActivitePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,32 +89,23 @@ class _FoodPageState extends State<FoodPage> {
               // primary: false,
               padding: EdgeInsets.only(left: 25.0, right: 25.0),
               children: <Widget>[
-                /*
-                  Padding(
-                    padding: EdgeInsets.only(top: 5.0),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height - 300,
-
-                      */
-
-                // child:
                 Container(
                   padding: EdgeInsets.only(top: 5.0),
                   height: MediaQuery.of(context).size.height - 300,
                   child: ListView(
                     children: <Widget>[
-                      _bulidFoodItem('images/plate1.png', "dish 1", "\$ 50.00",
-                          "sokar atay"),
-                      _bulidFoodItem('images/plate2.png', "dish 2", "\$ 24.00",
-                          "sokar hlib"),
-                      _bulidFoodItem('images/plate3.png', "dish 3", "\$ 10.00",
-                          "sokar hlib"),
-                      _bulidFoodItem('images/plate4.png', "dish 4", "\$ 100.00",
-                          "sokar hlib"),
-                      _bulidFoodItem('images/plate5.png', "dish 5", "\$ 60.00",
-                          "sokar hlib"),
-                      _bulidFoodItem('images/plate6.png', "dish 6", "\$ 77.00",
-                          "sokar hlib"),
+                      _bulidFoodItem('images/plate1.png', "Pâté de maquereau ",
+                          "images/ingridiant1.jpeg"),
+                      _bulidFoodItem('images/plate2.png', "Soupe de poisson",
+                          "images/ingridiant2.jpeg"),
+                      _bulidFoodItem('images/plate3.png', "Poulet aux fruits",
+                          "images/ingridiant3.jpeg"),
+                      _bulidFoodItem(
+                          'images/plate4.png', "dish 4", "images/plate1.png"),
+                      _bulidFoodItem(
+                          'images/plate5.png', "dish 5", "images/plate1.png"),
+                      _bulidFoodItem(
+                          'images/plate6.png', "dish 6", "images/plate1.png"),
                     ],
                   ),
                 ),
@@ -127,15 +118,14 @@ class _FoodPageState extends State<FoodPage> {
     );
   }
 
-  Widget _bulidFoodItem(
-      String imgPath, String foodName, String price, String ingrediant) {
+  Widget _bulidFoodItem(String imgPath, String foodName, String ingrediant) {
     return Container(
       padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) =>
-                  DetailFoodPage(imgPath, foodName, price, ingrediant)));
+                  DetailActivitePage(imgPath, foodName, ingrediant)));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -164,23 +154,11 @@ class _FoodPageState extends State<FoodPage> {
                             fontSize: 17.0,
                             fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        price,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 15.0,
-                            color: Colors.grey),
-                      ),
                     ],
                   )
                 ],
               ),
             ),
-            IconButton(
-              icon: Icon(Icons.add),
-              color: Colors.black,
-              onPressed: () {},
-            )
           ],
         ),
       ),

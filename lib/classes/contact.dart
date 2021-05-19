@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Contacts {
   final String specialite, mobile, name, ville, adresse, userId;
 

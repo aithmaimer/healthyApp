@@ -24,12 +24,6 @@ class ListContactState extends State<ListContact> {
     });
   }
 
-  Future<void> _signout() async {
-    auth.signOut();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -50,11 +44,6 @@ class ListContactState extends State<ListContact> {
               }));
             },
           ),
-          FlatButton(
-            //  color: Colors.white,
-            child: Text('SignOut'),
-            onPressed: _signout,
-          )
         ],
       ),
       body: Container(

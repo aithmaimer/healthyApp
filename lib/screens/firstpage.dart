@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_app/screens/AddDocierMedicale.dart';
 import 'package:healthy_app/screens/home.dart';
 
 class FirstPage extends StatelessWidget {
@@ -293,7 +294,10 @@ class FirstPage extends StatelessWidget {
                 primary: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, "homeScreen");
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddDocierMedicale()));
               },
               child: Text(
                 "Let's go",

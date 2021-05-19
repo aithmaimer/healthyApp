@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthy_app/aide/foodTest.dart';
 import 'package:healthy_app/authentification/login.dart';
-import 'package:healthy_app/screens/food.dart';
+import 'package:healthy_app/screens/ActivitePage.dart';
+import 'package:healthy_app/screens/AddDocierMedicale.dart';
 import 'package:healthy_app/screens/listContacts.dart';
-
 import 'information.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -73,10 +74,42 @@ class MenuDrawer extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FoodPage(),
+                        builder: (context) => FoodTest(),
                       ));
                 },
                 title: Text("Repas"),
+                leading: Icon(
+                  Icons.group,
+                  color: Colors.lightBlueAccent,
+                ),
+              )),
+          Container(
+              height: 50,
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ActivitePage(),
+                      ));
+                },
+                title: Text("Activiter phisiques"),
+                leading: Icon(
+                  Icons.group,
+                  color: Colors.lightBlueAccent,
+                ),
+              )),
+          Container(
+              height: 50,
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddDocierMedicale(),
+                      ));
+                },
+                title: Text("Docier Medicale"),
                 leading: Icon(
                   Icons.group,
                   color: Colors.lightBlueAccent,
@@ -86,7 +119,8 @@ class MenuDrawer extends StatelessWidget {
             color: Colors.blue,
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
-              Navigator.pushNamed(context, '/');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
             },
             child: Text(
               "Logout",

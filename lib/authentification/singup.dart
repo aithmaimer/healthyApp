@@ -33,14 +33,11 @@ class CreateNewAccount extends StatelessWidget {
           if (e.code == 'weak-password') {
             Alert(context: context, title: "The password provided is too weak.")
                 .show();
-           
           } else if (e.code == 'email-already-in-use') {
             Alert(
                     context: context,
                     title: "The account already exists for that email.")
                 .show();
-
-           
           }
         } catch (e) {
           print(e);
@@ -85,7 +82,6 @@ class CreateNewAccount extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            
                           ],
                         ),
                         SizedBox(
