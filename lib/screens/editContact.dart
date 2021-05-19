@@ -19,19 +19,12 @@ class EditContactState extends State<EditContact> {
   User user = FirebaseAuth.instance.currentUser;
   CollectionReference usercontact =
       FirebaseFirestore.instance.collection('contacts');
-  final auth = FirebaseAuth.instance;
 
   Future<void> getUserData() async {
     User userData = await FirebaseAuth.instance.currentUser;
     setState(() {
       user = userData;
     });
-  }
-
-  Future<void> _signout() async {
-    auth.signOut();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Home()));
   }
 
   Future<void> deleteContact() async {
@@ -78,12 +71,6 @@ class EditContactState extends State<EditContact> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Modifier Contact'),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('SignOut'),
-            onPressed: _signout,
-          )
-        ],
       ),
       body: Container(
         child: Column(

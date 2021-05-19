@@ -16,18 +16,18 @@ class AddContactState extends State<AddContact> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
   String specialite, mobile, name, ville, adresse;
   User user = FirebaseAuth.instance.currentUser;
-  final auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
   Future<void> getUserData() async {
     User userData = await FirebaseAuth.instance.currentUser;
     setState(() {
       user = userData;
     });
-  }
-
-  Future<void> _signout() async {
-    auth.signOut();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Home()));
   }
 
   Future<void> insertData(final Contacts) async {
@@ -59,24 +59,11 @@ class AddContactState extends State<AddContact> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    getUserData();
-  }
-
-  @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text('Add New Contact'),
-        actions: <Widget>[
-          FlatButton(
-            //  color: Colors.white,
-            child: Text('SignOut'),
-            onPressed: _signout,
-          )
-        ],
       ),
       body: Container(
         child: Column(

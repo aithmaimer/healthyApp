@@ -35,24 +35,6 @@ class _FoodTestState extends State<FoodTest> {
                         MaterialPageRoute(builder: (context) => Home()));
                   },
                 ),
-                Container(
-                  width: 125.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.filter_list),
-                        color: Colors.white,
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.menu),
-                        color: Colors.white,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -63,13 +45,15 @@ class _FoodTestState extends State<FoodTest> {
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
               children: <Widget>[
-                Text(
-                  'Restaurant',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25.0),
+                Center(
+                  child: Text(
+                    'Restaurant',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0),
+                  ),
                 ),
                 SizedBox(
                   width: 10.0,

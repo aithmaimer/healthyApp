@@ -11,8 +11,6 @@ class DetailFoodTest extends StatefulWidget {
 }
 
 class _DetailFoodTestState extends State<DetailFoodTest> {
-  var selectedCard = 'WEIGHT';
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
