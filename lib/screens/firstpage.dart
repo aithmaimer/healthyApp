@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_app/screens/AddDocierMedicale.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:healthy_app/screens/home.dart';
 
 class FirstPage extends StatefulWidget {

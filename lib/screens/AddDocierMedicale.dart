@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:healthy_app/classes/docierMedi.dart';
 import 'package:healthy_app/screens/home.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../pallete.dart';
@@ -22,11 +24,14 @@ class _AddDocierMedicaleState extends State<AddDocierMedicale> {
       _poid,
       _taille,
       _dateNaissance;
-  // DateTime ;
-
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
   User user = FirebaseAuth.instance.currentUser;
-  //final auth = FirebaseAuth.instance;
+
+  File _file;
+  Future pickercamera() async {
+    final myfile = await ImagePicker().getImage(source: ImageSource.camera);
+  }
+
   Future<void> getUserData() async {
     User userData = await FirebaseAuth.instance.currentUser;
     setState(() {
@@ -272,12 +277,12 @@ class _AddDocierMedicaleState extends State<AddDocierMedicale> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       /* validator: (val) {
-                        if (val.length > 100)
-                          return "User can't to be larger then 100 letters ";
-                        else if (val.length < 2)
-                          return "User can't to be lesse then 2 letters ";
-                        return null;
-                      },*/
+                          if (val.length > 100)
+                            return "User can't to be larger then 100 letters ";
+                          else if (val.length < 2)
+                            return "User can't to be lesse then 2 letters ";
+                          return null;
+                        },*/
                       onSaved: (val) {
                         _taille = val;
                       },
@@ -299,6 +304,23 @@ class _AddDocierMedicaleState extends State<AddDocierMedicale> {
                       textInputAction: TextInputAction.next,
                     ),
                   ),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddDocierMedicale(),
+                              ));
+                        },
+                        title: Text("ajouter un photo ou bien un fichier"),
+                        trailing: IconButton(
+                          icon: Icon(Icons.camera_alt),
+                          color: Colors.lightBlueAccent,
+                          onPressed: () {},
+                        ),
+                      )),
                 ],
               ),
             ),
