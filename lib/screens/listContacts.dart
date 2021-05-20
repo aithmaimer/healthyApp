@@ -15,8 +15,8 @@ class ListContact extends StatefulWidget {
 
 class ListContactState extends State<ListContact> {
   User user = FirebaseAuth.instance.currentUser;
-
   final auth = FirebaseAuth.instance;
+
   Future<void> getUserData() async {
     User userData = await FirebaseAuth.instance.currentUser;
     setState(() {

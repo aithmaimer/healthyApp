@@ -61,7 +61,7 @@ class _DetailActivitePageState extends State<DetailActivitePage> {
                   width: MediaQuery.of(context).size.width,
                 )),
             Positioned(
-              top: 30,
+              top: 10,
               left: (MediaQuery.of(context).size.width / 2) - 100,
               child: Hero(
                 tag: widget.document["image"],
@@ -77,7 +77,7 @@ class _DetailActivitePageState extends State<DetailActivitePage> {
               width: 200,
             ),
             Positioned(
-              top: 250,
+              top: 230,
               left: 25,
               right: 25,
               child: Column(
@@ -93,13 +93,13 @@ class _DetailActivitePageState extends State<DetailActivitePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                 ],
               ),
             ),
             Positioned(
-              top: 300,
+              top: 260,
               left: 25,
               right: 25,
               child: Column(
@@ -107,7 +107,7 @@ class _DetailActivitePageState extends State<DetailActivitePage> {
                 children: <Widget>[
                   Container(
                     // width: 100,
-                    height: 250,
+                    height: 400,
                     // margin: EdgeInsets.only(top: 45),
                     decoration: BoxDecoration(
                         //  shape: BoxShape.circle,
@@ -116,9 +116,6 @@ class _DetailActivitePageState extends State<DetailActivitePage> {
                               widget.document["detail"],
                             ),
                             fit: BoxFit.fill)),
-                  ),
-                  SizedBox(
-                    height: 20,
                   ),
                 ],
               ),

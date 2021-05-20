@@ -6,6 +6,8 @@ import 'package:healthy_app/pallete.dart';
 import 'package:healthy_app/widgets/widgets.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import 'login.dart';
+
 class CreateNewAccount extends StatelessWidget {
   String myuser, myemail, myPassworld;
   final _passworldControler = new TextEditingController();
@@ -273,7 +275,11 @@ class CreateNewAccount extends StatelessWidget {
                                   UserCredential response = await signUp();
                                   print("===================");
                                   if (response != null) {
-                                    Navigator.of(context).pushNamed("/");
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()));
                                   } else
                                     print("errrrrrrrrrrrr");
                                 },

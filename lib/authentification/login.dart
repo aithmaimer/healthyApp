@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthy_app/authentification/authentification.dart';
 import 'package:healthy_app/pallete.dart';
 import 'package:healthy_app/screens/firstpage.dart';
 import 'package:healthy_app/widgets/widgets.dart';

@@ -92,8 +92,6 @@ class _FoodTestState extends State<FoodTest> {
                     height: MediaQuery.of(context).size.height - 300,
                     child: new ListView(
                       children: snapshot.data.docs.map((document) {
-                        print(document['image']);
-
                         return new Container(
                           padding: EdgeInsets.only(
                               left: 10.0, right: 10.0, top: 10.0),
@@ -105,7 +103,6 @@ class _FoodTestState extends State<FoodTest> {
                                     builder: (context) =>
                                         DetailFoodTest(document),
                                   ));
-                              print(document.id);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

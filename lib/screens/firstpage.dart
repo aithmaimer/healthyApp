@@ -1,8 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_app/screens/AddDocierMedicale.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:healthy_app/screens/home.dart';
 
-class FirstPage extends StatelessWidget {
+class FirstPage extends StatefulWidget {
+  @override
+  _FirstPageState createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  /* savePref(String go) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("go", go);
+  }
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var go = preferences.getString("go");
+    if (go != null) {
+      Navigator.of(context).pushNamed('homeScreen');
+    } else if (go == null)
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => AddDocierMedicale()));
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getPref();
+    super.initState();
+  }
+*/
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -294,10 +322,10 @@ class FirstPage extends StatelessWidget {
                 primary: Colors.white,
               ),
               onPressed: () {
+                //savePref("go");
+
                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddDocierMedicale()));
+                    context, MaterialPageRoute(builder: (context) => Home()));
               },
               child: Text(
                 "Let's go",
