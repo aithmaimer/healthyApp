@@ -4,6 +4,7 @@ import 'package:healthy_app/aide/foodTest.dart';
 import 'package:healthy_app/authentification/login.dart';
 import 'package:healthy_app/screens/ActivitePage.dart';
 import 'package:healthy_app/screens/AddDocierMedicale.dart';
+import 'package:healthy_app/screens/addMedicament.dart';
 import 'package:healthy_app/screens/listContacts.dart';
 import 'information.dart';
 
@@ -110,6 +111,22 @@ class MenuDrawer extends StatelessWidget {
                       ));
                 },
                 title: Text("Docier Medicale"),
+                leading: Icon(
+                  Icons.group,
+                  color: Colors.lightBlueAccent,
+                ),
+              )),
+          Container(
+              height: 50,
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddMedicament(),
+                      ));
+                },
+                title: Text("Medicament"),
                 leading: Icon(
                   Icons.group,
                   color: Colors.lightBlueAccent,
