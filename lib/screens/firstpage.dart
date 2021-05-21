@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:healthy_app/screens/home.dart';
 
+import 'HomePage.dart';
+
 class FirstPage extends StatefulWidget {
   @override
   _FirstPageState createState() => _FirstPageState();
@@ -325,6 +327,8 @@ class _FirstPageState extends State<FirstPage> {
 
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (context) => Home()));
+                // Navigator.pushReplacement(context,
+                //   MaterialPageRoute(builder: (context) => WelcomeScreen()));
               },
               child: Text(
                 "Let's go",
