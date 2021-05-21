@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:healthy_app/authentification/authentification.dart';
 import 'package:healthy_app/screens/addContact.dart';
 import 'package:healthy_app/screens/editContact.dart';
+import 'package:url_launcher/url_launcher.dart';
 import './Home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -16,6 +17,18 @@ class ListContact extends StatefulWidget {
 class ListContactState extends State<ListContact> {
   User user = FirebaseAuth.instance.currentUser;
   final auth = FirebaseAuth.instance;
+
+  Future _calling(String url) async {
+    print("fonction t3aytaat");
+
+    if (await canLaunch(url)) {
+      print("siiir");
+      print(url);
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   Future<void> getUserData() async {
     User userData = await FirebaseAuth.instance.currentUser;
@@ -59,16 +72,25 @@ class ListContactState extends State<ListContact> {
             } else {
               return new ListView(
                 children: snapshot.data.docs.map((document) {
-                  return new ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditContact(document),
-                          ));
-                    },
-                    title: new Text(document["name"]),
-                    subtitle: new Text(document["mobile"]),
+                  return Container(
+                    child: new ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditContact(document),
+                            ));
+                      },
+                      title: new Text(document["name"]),
+                      trailing: IconButton(
+                          icon: Icon(Icons.call),
+                          color: Colors.green,
+                          onPressed: () {
+                            var phone = document["mobile"].toString();
+                            _calling('tel:$phone');
+                          }),
+                      subtitle: new Text(document["mobile"]),
+                    ),
                   );
                 }).toList(),
               );
