@@ -6,7 +6,7 @@ import 'package:healthy_app/screens/ActivitePage.dart';
 import 'package:healthy_app/screens/AddDocierMedicale.dart';
 import 'package:healthy_app/screens/addMedicament.dart';
 import 'package:healthy_app/screens/listContacts.dart';
-import 'package:healthy_app/screens/mapAncologie.dart';
+
 import 'information.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -96,22 +96,6 @@ class MenuDrawer extends StatelessWidget {
                       ));
                 },
                 title: Text("Activiter phisiques"),
-                leading: Icon(
-                  Icons.group,
-                  color: Colors.lightBlueAccent,
-                ),
-              )),
-          Container(
-              height: 50,
-              child: ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MapAncologie(),
-                      ));
-                },
-                title: Text("Map"),
                 leading: Icon(
                   Icons.group,
                   color: Colors.lightBlueAccent,
