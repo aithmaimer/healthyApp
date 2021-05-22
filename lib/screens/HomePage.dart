@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_app/aide/constant.dart';
 import 'package:healthy_app/aide/foodTest.dart';
-
 import 'package:healthy_app/aide/header.dart';
 import 'package:healthy_app/aide/headerLogo.dart';
 import 'package:healthy_app/aide/menucard.dart';
 import 'package:healthy_app/screens/ActivitePage.dart';
 import 'package:healthy_app/screens/addMedicament.dart';
+import 'package:healthy_app/screens/home.dart';
 import 'package:healthy_app/screens/information.dart';
 import 'package:healthy_app/screens/listContacts.dart';
-import 'package:healthy_app/screens/mapAncologie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -72,10 +72,18 @@ class WelcomeScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Icon(
-                          Icons.menu,
-                          color: mSecondBackgroundColor,
-                          size: 36,
+                        IconButton(
+                          icon: Icon(
+                            Icons.menu,
+                            color: mSecondBackgroundColor,
+                            size: 36,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Home()));
+                          },
                         ),
                       ],
                     ),
@@ -109,11 +117,13 @@ class WelcomeScreen extends StatelessWidget {
                       MenuCard(
                         imageUrl: 'images/map.jpg',
                         title: 'Centre Ancologie',
-                        press: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MapAncologie()));
+                        press: () async {
+                          if (await canLaunch(
+                              "https://www.google.com/maps/search/oncology+maroc/@33.0991727,-11.1186977,6.78z?hl=fr"))
+                            await launch(
+                                "https://www.google.com/maps/search/oncology+maroc/@33.0991727,-11.1186977,6.78z?hl=fr");
+                          else
+                            throw "could not open Map";
                         },
                       ),
                     ],
