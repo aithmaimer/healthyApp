@@ -22,8 +22,8 @@ class MenuCard extends StatelessWidget {
         children: <Widget>[
           Image.asset(
             imageUrl,
-            width: 135,
-            height: 135,
+            width: 90,
+            height: 90,
           ),
           SizedBox(
             height: 8,

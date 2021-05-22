@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:healthy_app/screens/HomePage.dart';
 import 'package:healthy_app/screens/home.dart';
-
 import 'DetailPageTest.dart';
 
 class FoodTest extends StatefulWidget {
@@ -13,8 +12,6 @@ class FoodTest extends StatefulWidget {
 class _FoodTestState extends State<FoodTest> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     Query<Map<String, dynamic>> food =
         FirebaseFirestore.instance.collection('food');
 
@@ -31,8 +28,10 @@ class _FoodTestState extends State<FoodTest> {
                   icon: Icon(Icons.arrow_back_ios),
                   color: Colors.white,
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Home()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WelcomeScreen()));
                   },
                 ),
               ],

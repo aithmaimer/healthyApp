@@ -325,10 +325,10 @@ class _FirstPageState extends State<FirstPage> {
               onPressed: () {
                 //savePref("go");
 
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => Home()));
-                // Navigator.pushReplacement(context,
-                //   MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                // Navigator.pushReplacement(
+                //     context, MaterialPageRoute(builder: (context) => Home()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => WelcomeScreen()));
               },
               child: Text(
                 "Let's go",

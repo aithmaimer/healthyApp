@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_app/aide/constant.dart';
+import 'package:healthy_app/aide/foodTest.dart';
 
 import 'package:healthy_app/aide/header.dart';
 import 'package:healthy_app/aide/headerLogo.dart';
 import 'package:healthy_app/aide/menucard.dart';
+import 'package:healthy_app/screens/ActivitePage.dart';
+import 'package:healthy_app/screens/addMedicament.dart';
+import 'package:healthy_app/screens/information.dart';
 import 'package:healthy_app/screens/listContacts.dart';
+import 'package:healthy_app/screens/mapAncologie.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -13,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           MyHeader(
-            height: 333,
+            height: 300,
             imageUrl: 'images/welcome.png',
             child: Column(
               children: <Widget>[
@@ -35,12 +40,6 @@ class WelcomeScreen extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                   ),
-                ),
-                Spacer(),
-                Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.white,
-                  size: 36,
                 ),
                 SizedBox(
                   height: 24,
@@ -88,13 +87,34 @@ class WelcomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       MenuCard(
-                        imageUrl: 'images/general_practice.png',
-                        title: 'General Practice',
-                        press: () {},
+                        imageUrl: 'images/contactss.jpg',
+                        title: 'Contact',
+                        press: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ListContact()));
+                        },
                       ),
                       MenuCard(
-                        imageUrl: 'images/specialist.png',
-                        title: 'Specialist',
+                        imageUrl: 'images/medicament.jpg',
+                        title: 'Medicament',
+                        press: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddMedicament()));
+                        },
+                      ),
+                      MenuCard(
+                        imageUrl: 'images/map.jpg',
+                        title: 'Centre Ancologie',
+                        press: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MapAncologie()));
+                        },
                       ),
                     ],
                   ),
@@ -105,18 +125,34 @@ class WelcomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       MenuCard(
-                        imageUrl: 'images/sexual_health.png',
-                        title: 'Sexual Health',
+                        press: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FoodTest()));
+                        },
+                        imageUrl: 'images/repas.jpg',
+                        title: 'Repas',
                       ),
                       MenuCard(
                         press: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ListContact()));
+                                  builder: (context) => ActivitePage()));
                         },
-                        imageUrl: 'images/immunisation.png',
-                        title: 'Immunisation',
+                        imageUrl: 'images/activite.png',
+                        title: 'Activités Physiques',
+                      ),
+                      MenuCard(
+                        press: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Information()));
+                        },
+                        imageUrl: 'images/information.jpg',
+                        title: 'Information',
                       ),
                     ],
                   ),

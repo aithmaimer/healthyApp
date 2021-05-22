@@ -64,14 +64,15 @@ flutter:
     - images/login2.jpg
     - images/profile.jpg
     - images/avatar_head.png
-    - images/avatar.png
-    - images/doctor.png
     - images/logo.png
-    - images/specialist.png
-    - images/general_practice.png
-    - images/immunisation.png
     - images/welcome.png
-    - images/sexual_health.png
+    - images/contacts.png
+    - images/activite.png
+    - images/repas.jpg
+    - images/information.jpg
+    - images/map.jpg
+    - images/medicament.jpg
+    - images/contactss.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
