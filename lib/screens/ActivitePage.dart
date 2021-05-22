@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:healthy_app/screens/HomePage.dart';
-import 'package:healthy_app/screens/home.dart';
-
 import 'detailActivitePage.dart';
 
 class ActivitePage extends StatefulWidget {

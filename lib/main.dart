@@ -1,9 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/authentification/authentification.dart';
-import 'package:healthy_app/screens/HomePage.dart';
 import 'package:healthy_app/screens/firstpage.dart';
-import 'package:healthy_app/screens/home.dart';
 import 'package:healthy_app/screens/AddDocierMedicale.dart';
 import 'package:healthy_app/screens/listContacts.dart';
 
@@ -23,12 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        //'HomeTest': (context) => WelcomeScreen(),
         '/': (context) => LoginScreen(),
         'ForgotPassword': (context) => ForgotPassword(),
         'CreateNewAccount': (context) => CreateNewAccount(),
         'firstPage': (context) => FirstPage(),
-        'homeScreen': (context) => Home(),
         'AddDocierMedicale': (context) => AddDocierMedicale(),
         'ListContact': (context) => ListContact(),
       },

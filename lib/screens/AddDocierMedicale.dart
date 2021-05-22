@@ -4,11 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:healthy_app/classes/docierMedi.dart';
-import 'package:healthy_app/screens/home.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-
-import '../pallete.dart';
 
 class AddDocierMedicale extends StatefulWidget {
   @override
@@ -353,8 +349,8 @@ class _AddDocierMedicaleState extends State<AddDocierMedicale> {
                   insertData(c.toMap());
                   print("=============");
                   print(_dateNaissance);
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                  // Navigator.pushReplacement(
+                  //   context, MaterialPageRoute(builder: (context) => Home()));
                 }
               },
               child: Text(

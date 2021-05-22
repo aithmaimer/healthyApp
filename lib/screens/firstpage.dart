@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:healthy_app/screens/home.dart';
-
 import 'HomePage.dart';
 
 class FirstPage extends StatefulWidget {

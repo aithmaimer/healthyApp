@@ -31,15 +31,24 @@ class _InformationState extends State<Information> {
             } else {
               return new ListView(
                 children: snapshot.data.docs.map((document) {
-                  return new ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MoreInfo(document),
-                          ));
-                    },
-                    title: new Text(document["titre"]),
+                  return Card(
+                    child: new ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MoreInfo(document),
+                            ));
+                      },
+                      title: new Text(
+                        document["titre"],
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                            fontSize: 18),
+                      ),
+                      trailing: Icon(Icons.navigate_next),
+                    ),
                   );
                 }).toList(),
               );

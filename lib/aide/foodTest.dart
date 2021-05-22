@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:healthy_app/screens/HomePage.dart';
-import 'package:healthy_app/screens/home.dart';
 import 'DetailPageTest.dart';
 
 class FoodTest extends StatefulWidget {
