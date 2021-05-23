@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:healthy_app/authentification/authentification.dart';
 import 'package:healthy_app/pallete.dart';
 import 'package:healthy_app/screens/HomePage.dart';
+import 'package:healthy_app/screens/acueil.dart';
 import 'package:healthy_app/screens/firstpage.dart';
 import 'package:healthy_app/widgets/widgets.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginScreen extends StatelessWidget {
   String myemail, myPassworld;
-  GlobalKey<FormState> formstate = new GlobalKey<FormState>();
+  GlobalKey<FormState> formstateLogin = new GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
   User user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     LogIn() async {
-      var formdata = formstate.currentState;
+      var formdata = formstateLogin.currentState;
       if (formdata.validate()) {
         formdata.save();
         try {
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
                 .show();
           } else
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => FirstPage()));
+                context, MaterialPageRoute(builder: (context) => Acueil()));
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
             Alert(context: context, title: "No user found for that email.")
@@ -53,7 +54,7 @@ class LoginScreen extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Form(
-            key: formstate,
+            key: formstateLogin,
             child: Column(
               children: [
                 Flexible(
@@ -80,9 +81,9 @@ class LoginScreen extends StatelessWidget {
                       child: TextFormField(
                         validator: (val) {
                           if (val.length > 100)
-                            return "Email can't to be larger then 100 letters ";
+                            return "  Email can't to be larger then 100 letters ";
                           else if (val.length < 2)
-                            return "Email can't to be lesse then 2 letters ";
+                            return "  Email can't to be lesse then 2 letters ";
                           return null;
                         },
                         onSaved: (val) {
@@ -118,9 +119,9 @@ class LoginScreen extends StatelessWidget {
                       child: TextFormField(
                         validator: (String val) {
                           if (val.length > 100)
-                            return "Passworld can't to be larger then 100 letters ";
+                            return "    Passworld can't to be larger then 100 letters ";
                           else if (val.length < 4)
-                            return "Passworld can't to be lesse then 4 letters ";
+                            return "   Passworld can't to be lesse then 4 letters ";
                           return null;
                         },
                         onSaved: (val) {

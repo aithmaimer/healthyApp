@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/authentification/authentification.dart';
 
@@ -10,6 +12,17 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  User user = FirebaseAuth.instance.currentUser;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  Query<Map<String, dynamic>> docier =
+      FirebaseFirestore.instance.collection('docierMedicale');
+  Future<void> getUserData() async {
+    User userData = await FirebaseAuth.instance.currentUser;
+    setState(() {
+      user = userData;
+    });
+  }
+
   int _currentIndex = 0;
   final List pages = [
     Acueil(),
@@ -18,6 +31,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Query<Map<String, dynamic>> users = FirebaseFirestore.instance
+        .collection('contacts')
+        .where('userId', isEqualTo: user.uid);
     return Scaffold(
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -37,7 +53,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           BottomNavigationBarItem(
             icon: IconButton(
               icon: Icon(Icons.logout),
-              onPressed: () {
+              onPressed: () async {
+                //auth.signOut();
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginScreen()));
               },

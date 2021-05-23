@@ -9,13 +9,13 @@ class ForgotPassword extends StatelessWidget {
   String _email;
   final auth = FirebaseAuth.instance;
 
-  GlobalKey<FormState> formstate = new GlobalKey<FormState>();
+  GlobalKey<FormState> formstateForgetPass = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     resetEmail() async {
-      var formdata = formstate.currentState;
+      var formdata = formstateForgetPass.currentState;
       if (formdata.validate()) {
         formdata.save();
         auth.sendPasswordResetEmail(email: _email);
@@ -49,7 +49,7 @@ class ForgotPassword extends StatelessWidget {
           body: Column(
             children: [
               Form(
-                key: formstate,
+                key: formstateForgetPass,
                 child: Center(
                   child: Column(
                     children: [

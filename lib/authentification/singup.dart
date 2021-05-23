@@ -1,51 +1,86 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:healthy_app/classes/docierMedi.dart';
 import 'package:healthy_app/pallete.dart';
 import 'package:healthy_app/widgets/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'login.dart';
 
-class CreateNewAccount extends StatelessWidget {
-  String myuser, myemail, myPassworld;
+class CreateNewAccount extends StatefulWidget {
+  @override
+  _CreateNewAccountState createState() => _CreateNewAccountState();
+}
+
+class _CreateNewAccountState extends State<CreateNewAccount> {
+  String myuser,
+      myemail,
+      myPassworld,
+      _groupSanguin,
+      _poid,
+      _taille,
+      _dateNaissance;
+
   final _passworldControler = new TextEditingController();
   final _confirmePassworldControler = new TextEditingController();
+
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
+
   User user = FirebaseAuth.instance.currentUser;
+  Future<void> insertData(final docierMedi) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    firestore.collection("docierMedicale").add(docierMedi);
+  }
+
+  DateTime _dateTime;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _dateTime = DateTime.now();
+  }
+
+  void dropChange(String val) {
+    setState(() {
+      _groupSanguin = val;
+    });
+  }
+
+  signUp() async {
+    var formdata = formstate.currentState;
+    if (formdata.validate()) {
+      formdata.save();
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: myemail, password: myPassworld);
+        Alert(context: context, title: "Your verification email has been sent")
+            .show();
+        await user.sendEmailVerification();
+        return userCredential;
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          Alert(context: context, title: "The password provided is too weak.")
+              .show();
+        } else if (e.code == 'email-already-in-use') {
+          Alert(
+                  context: context,
+                  title: "The account already exists for that email.")
+              .show();
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    signUp() async {
-      var formdata = formstate.currentState;
-      if (formdata.validate()) {
-        formdata.save();
-        try {
-          UserCredential userCredential = await FirebaseAuth.instance
-              .createUserWithEmailAndPassword(
-                  email: myemail, password: myPassworld);
-          await user.sendEmailVerification();
-          Alert(
-                  context: context,
-                  title: "Your verification email has been sent")
-              .show();
-          return userCredential;
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'weak-password') {
-            Alert(context: context, title: "The password provided is too weak.")
-                .show();
-          } else if (e.code == 'email-already-in-use') {
-            Alert(
-                    context: context,
-                    title: "The account already exists for that email.")
-                .show();
-          }
-        } catch (e) {
-          print(e);
-        }
-      }
-    }
 
     return Stack(
       children: [
@@ -59,33 +94,6 @@ class CreateNewAccount extends StatelessWidget {
                     key: formstate,
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: size.width * 0.1,
-                        ),
-                        Stack(
-                          children: [
-                            Center(
-                              child: ClipOval(
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                                  child: CircleAvatar(
-                                    radius: size.width * 0.14,
-                                    backgroundColor:
-                                        Colors.grey[400].withOpacity(
-                                      0.4,
-                                    ),
-                                    child: Icon(
-                                      FontAwesomeIcons.user,
-                                      color: kWhite,
-                                      size: size.width * 0.1,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                         SizedBox(
                           height: size.width * 0.1,
                         ),
@@ -132,7 +140,7 @@ class CreateNewAccount extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: 25,
+                              height: 5,
                             ),
                             Container(
                               height: size.height * 0.1,
@@ -175,7 +183,7 @@ class CreateNewAccount extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: 25,
+                              height: 5,
                             ),
                             Container(
                               height: size.height * 0.1,
@@ -220,7 +228,7 @@ class CreateNewAccount extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: 25,
+                              height: 5,
                             ),
                             Container(
                               height: size.height * 0.1,
@@ -256,12 +264,181 @@ class CreateNewAccount extends StatelessWidget {
                                   obscureText: true,
                                   style: kBodyText,
                                   keyboardType: TextInputType.visiblePassword,
+                                  textInputAction: TextInputAction.next,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              height: size.height * 0.1,
+                              width: size.width * 0.8,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[500].withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  readOnly: true,
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText:
+                                          "Date Naissance: ${_dateTime.day}/${_dateTime.month}/${_dateTime.year}",
+                                      hintStyle: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          height: 1.5),
+                                      prefixIcon: Icon(
+                                        Icons.date_range_outlined,
+                                        color: Colors.white,
+                                        size: 28,
+                                      )),
+                                  onTap: () async {
+                                    DateTime date = await showDatePicker(
+                                        context: context,
+                                        initialDate: _dateTime,
+                                        firstDate: DateTime(1930),
+                                        lastDate: DateTime(2022));
+                                    if (date != null)
+                                      setState(() {
+                                        _dateTime = date;
+                                        _dateNaissance =
+                                            DateFormat('yyyy-MM-dd')
+                                                .format(date);
+                                      });
+                                    print(
+                                        "${_dateTime.day}/${_dateTime.month}/${_dateTime.year}");
+                                    print(_dateNaissance);
+                                  },
+                                  style: kBodyText,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              height: size.height * 0.1,
+                              width: size.width * 0.8,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[500].withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: DropdownButtonFormField(
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        prefixIcon: Icon(
+                                          Icons.invert_colors,
+                                          color: Colors.white,
+                                          size: 28,
+                                        ),
+                                        hintText: "Groupe sanguin",
+                                        hintStyle: TextStyle(
+                                            fontSize: 22,
+                                            color: Colors.white,
+                                            height: 1.5),
+                                      ),
+                                      onChanged: dropChange,
+                                      value: _groupSanguin,
+                                      items: <String>[
+                                        "A+",
+                                        "A-",
+                                        "B+",
+                                        "B-",
+                                        "AB+",
+                                        "AB-",
+                                        "O+",
+                                        "O-"
+                                      ].map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                        return DropdownMenuItem<String>(
+                                          child: Text(value,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.black,
+                                                  height: 1.5)),
+                                          value: value,
+                                        );
+                                      }).toList())),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              height: size.height * 0.1,
+                              width: size.width * 0.8,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[500].withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  onSaved: (val) {
+                                    _poid = val;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    prefixIcon: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: Icon(
+                                        Icons.line_weight,
+                                        size: 28,
+                                        color: kWhite,
+                                      ),
+                                    ),
+                                    hintText: "Poid (kg)",
+                                    hintStyle: kBodyText,
+                                  ),
+                                  style: kBodyText,
+                                  keyboardType: TextInputType.number,
+                                  textInputAction: TextInputAction.next,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              height: size.height * 0.1,
+                              width: size.width * 0.8,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[500].withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  onSaved: (val) {
+                                    _taille = val;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    prefixIcon: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: Icon(
+                                        Icons.line_weight,
+                                        size: 28,
+                                        color: kWhite,
+                                      ),
+                                    ),
+                                    hintText: "taille (cm)",
+                                    hintStyle: kBodyText,
+                                  ),
+                                  style: kBodyText,
+                                  keyboardType: TextInputType.number,
                                   textInputAction: TextInputAction.done,
                                 ),
                               ),
                             ),
                             SizedBox(
-                              height: 25,
+                              height: 5,
                             ),
                             Container(
                               height: size.height * 0.08,
@@ -275,6 +452,15 @@ class CreateNewAccount extends StatelessWidget {
                                   UserCredential response = await signUp();
                                   print("===================");
                                   if (response != null) {
+                                    final DocierMedi c = DocierMedi(
+                                        username: myuser,
+                                        email: myemail,
+                                        poid: _poid,
+                                        taille: _taille,
+                                        dateN: _dateNaissance,
+                                        groupSanguin: _groupSanguin,
+                                        userId: response.user.uid);
+                                    insertData(c.toMap());
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

@@ -12,7 +12,7 @@ class AddContact extends StatefulWidget {
 }
 
 class AddContactState extends State<AddContact> {
-  final GlobalKey<FormState> formState = GlobalKey<FormState>();
+  final GlobalKey<FormState> formSt = GlobalKey<FormState>();
   String specialite, mobile, name, ville, adresse;
   User user = FirebaseAuth.instance.currentUser;
 
@@ -29,11 +29,11 @@ class AddContactState extends State<AddContact> {
     });
   }
 
-  Future<void> insertData(final Contacts) async {
+  Future<void> insertData(final contacts) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore
         .collection("contacts")
-        .add(Contacts)
+        .add(contacts)
         .then((DocumentReference document) {})
         .catchError((e) {
       print(e);
@@ -41,8 +41,8 @@ class AddContactState extends State<AddContact> {
   }
 
   addContact() {
-    if (formState.currentState.validate()) {
-      formState.currentState.save();
+    if (formSt.currentState.validate()) {
+      formSt.currentState.save();
 
       final Contacts c = Contacts(
           specialite: specialite,
@@ -59,7 +59,6 @@ class AddContactState extends State<AddContact> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text('Add New Contact'),
@@ -70,7 +69,7 @@ class AddContactState extends State<AddContact> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Form(
-              key: formState,
+              key: formSt,
               child: Container(
                 child: Column(
                   children: <Widget>[
