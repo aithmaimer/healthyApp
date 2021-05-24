@@ -38,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        iconSize: 30,
+        iconSize: 25,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -54,7 +54,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             icon: IconButton(
               icon: Icon(Icons.logout),
               onPressed: () async {
-                //auth.signOut();
+                // auth.signOut();
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginScreen()));
               },

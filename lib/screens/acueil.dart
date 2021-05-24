@@ -19,147 +19,170 @@ class _AcueilState extends State<Acueil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          MyHeader(
-            height: 300,
-            imageUrl: 'images/welcome.png',
-            child: Column(
-              children: <Widget>[
-                HeaderLogo(),
-                Text(
-                  'Welcome',
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: mTitleTextColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Lorem ipsum dolor sit amet,\n consectetuer adipiscing elit',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [mBackgroundColor, mSecondBackgroundColor],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Our Health\nServices',
-                          style: TextStyle(
-                            color: mTitleTextColor,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+      body: ListView(
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.transparent,
+                child: Column(
+                  children: <Widget>[
+                    MyHeader(
+                      height: 290,
+                      imageUrl: 'images/welcome.png',
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 26,
                           ),
-                        )
-                      ],
+                          HeaderLogo(),
+                          Text(
+                            'Welcome',
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: mTitleTextColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            'Lorem ipsum dolor sit amet,\n consectetuer adipiscing elit',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 24,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 18,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      MenuCard(
-                        imageUrl: 'images/contactss.jpg',
-                        title: 'Contact',
-                        press: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ListContact()));
-                        },
+                    Flexible(
+                      child: Container(
+                        height: 900,
+                        //  width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [mBackgroundColor, mSecondBackgroundColor],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Our Health\nServices',
+                                    style: TextStyle(
+                                      color: mTitleTextColor,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 18,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                MenuCard(
+                                  imageUrl: 'images/contactss.jpg',
+                                  title: 'Contact',
+                                  press: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ListContact()));
+                                  },
+                                ),
+                                MenuCard(
+                                  imageUrl: 'images/medicament.jpg',
+                                  title: 'Medicament',
+                                  press: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddMedicament()));
+                                  },
+                                ),
+                                MenuCard(
+                                  imageUrl: 'images/map.jpg',
+                                  title: 'Centre Ancologie',
+                                  press: () async {
+                                    if (await canLaunch(
+                                        "https://www.google.com/maps/search/oncology+maroc/@33.0991727,-11.1186977,6.78z?hl=fr"))
+                                      await launch(
+                                          "https://www.google.com/maps/search/oncology+maroc/@33.0991727,-11.1186977,6.78z?hl=fr");
+                                    else
+                                      throw "could not open Map";
+                                  },
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 18,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                MenuCard(
+                                  press: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => FoodTest()));
+                                  },
+                                  imageUrl: 'images/repas.jpg',
+                                  title: 'Repas',
+                                ),
+                                MenuCard(
+                                  press: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ActivitePage()));
+                                  },
+                                  imageUrl: 'images/activite.png',
+                                  title: 'Activités Physiques',
+                                ),
+                                MenuCard(
+                                  press: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Information()));
+                                  },
+                                  imageUrl: 'images/information.jpg',
+                                  title: 'Information',
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      MenuCard(
-                        imageUrl: 'images/medicament.jpg',
-                        title: 'Medicament',
-                        press: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AddMedicament()));
-                        },
-                      ),
-                      MenuCard(
-                        imageUrl: 'images/map.jpg',
-                        title: 'Centre Ancologie',
-                        press: () async {
-                          if (await canLaunch(
-                              "https://www.google.com/maps/search/oncology+maroc/@33.0991727,-11.1186977,6.78z?hl=fr"))
-                            await launch(
-                                "https://www.google.com/maps/search/oncology+maroc/@33.0991727,-11.1186977,6.78z?hl=fr");
-                          else
-                            throw "could not open Map";
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 18,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      MenuCard(
-                        press: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => FoodTest()));
-                        },
-                        imageUrl: 'images/repas.jpg',
-                        title: 'Repas',
-                      ),
-                      MenuCard(
-                        press: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ActivitePage()));
-                        },
-                        imageUrl: 'images/activite.png',
-                        title: 'Activités Physiques',
-                      ),
-                      MenuCard(
-                        press: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Information()));
-                        },
-                        imageUrl: 'images/information.jpg',
-                        title: 'Information',
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),
