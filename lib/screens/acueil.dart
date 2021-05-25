@@ -5,7 +5,7 @@ import 'package:healthy_app/aide/header.dart';
 import 'package:healthy_app/aide/headerLogo.dart';
 import 'package:healthy_app/aide/menucard.dart';
 import 'package:healthy_app/screens/ActivitePage.dart';
-import 'package:healthy_app/screens/addMedicament.dart';
+import 'package:healthy_app/screens/ListMedicament.dart';
 import 'package:healthy_app/screens/information.dart';
 import 'package:healthy_app/screens/listContacts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -50,7 +50,7 @@ class _AcueilState extends State<Acueil> {
                             height: 16,
                           ),
                           Text(
-                            'Lorem ipsum dolor sit amet,\n consectetuer adipiscing elit',
+                            "N'abandonnez pas.\nSoyez fort et positif",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
@@ -65,7 +65,6 @@ class _AcueilState extends State<Acueil> {
                     Flexible(
                       child: Container(
                         height: 900,
-                        //  width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [mBackgroundColor, mSecondBackgroundColor],
@@ -114,11 +113,11 @@ class _AcueilState extends State<Acueil> {
                                   imageUrl: 'images/medicament.jpg',
                                   title: 'Medicament',
                                   press: () {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                AddMedicament()));
+                                                ListMedicament()));
                                   },
                                 ),
                                 MenuCard(

@@ -76,40 +76,68 @@ class _MoreInfoState extends State<MoreInfo> {
         child: ListView(
           children: <Widget>[
             Container(
-                height: 50,
+              height: 50,
+              child: Card(
                 child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailPage(widget.document),
-                        ));
-                  },
-                  title: Text("What is it"),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailPage(widget.document),
+                          ));
+                    },
+                    title: Text(
+                      "What is it",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontSize: 18),
+                    ),
+                    trailing: Icon(Icons.navigate_next)),
+              ),
+            ),
+            Container(
+                height: 50,
+                child: Card(
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CausesPage(widget.document),
+                          ));
+                    },
+                    title: Text(
+                      "causes",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontSize: 18),
+                    ),
+                    trailing: Icon(Icons.navigate_next),
+                  ),
                 )),
             Container(
                 height: 50,
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CausesPage(widget.document),
-                        ));
-                  },
-                  title: Text("causes"),
-                )),
-            Container(
-                height: 50,
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TraitementPage(widget.document),
-                        ));
-                  },
-                  title: Text("traitement"),
+                child: Card(
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                TraitementPage(widget.document),
+                          ));
+                    },
+                    title: Text(
+                      "traitement",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontSize: 18),
+                    ),
+                    trailing: Icon(Icons.navigate_next),
+                  ),
                 )),
           ],
         ),

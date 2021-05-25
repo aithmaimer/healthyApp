@@ -1,32 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:healthy_app/screens/addContact.dart';
-import 'package:healthy_app/screens/editContact.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:healthy_app/classes/MedicamentPage.dart';
+import 'package:healthy_app/screens/showMedicament.dart';
 
-class ListContact extends StatefulWidget {
+class ListMedicament extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return ListContactState();
-  }
+  _ListMedicamentState createState() => _ListMedicamentState();
 }
 
-class ListContactState extends State<ListContact> {
+class _ListMedicamentState extends State<ListMedicament> {
   User user = FirebaseAuth.instance.currentUser;
-  final auth = FirebaseAuth.instance;
-
-  Future _calling(String url) async {
-    print("fonction t3aytaat");
-
-    if (await canLaunch(url)) {
-      print("siiir");
-      print(url);
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   Future<void> getUserData() async {
     User userData = await FirebaseAuth.instance.currentUser;
@@ -38,20 +22,18 @@ class ListContactState extends State<ListContact> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
-    Query<Map<String, dynamic>> users = FirebaseFirestore.instance
-        .collection('contacts')
+    Query<Map<String, dynamic>> medicament = FirebaseFirestore.instance
+        .collection('Medicament')
         .where('userId', isEqualTo: user.uid);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Contacts '),
+        title: Text('Medicament'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return AddContact();
+                return MedicamentPage();
               }));
             },
           ),
@@ -59,7 +41,7 @@ class ListContactState extends State<ListContact> {
       ),
       body: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: users.snapshots(),
+          stream: medicament.snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -70,24 +52,23 @@ class ListContactState extends State<ListContact> {
             } else {
               return new ListView(
                 children: snapshot.data.docs.map((document) {
-                  return Container(
+                  return Card(
                     child: new ListTile(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => EditContact(document),
+                              builder: (context) => ShowMedicament(document),
                             ));
                       },
-                      title: new Text(document["name"]),
-                      trailing: IconButton(
-                          icon: Icon(Icons.call),
-                          color: Colors.green,
-                          onPressed: () {
-                            var phone = document["mobile"].toString();
-                            _calling('tel:$phone');
-                          }),
-                      subtitle: new Text(document["mobile"]),
+                      title: new Text(
+                        document["nomMedicament"],
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                            fontSize: 18),
+                      ),
+                      trailing: Icon(Icons.navigate_next),
                     ),
                   );
                 }).toList(),

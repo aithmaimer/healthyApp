@@ -1,16 +1,18 @@
 class Medicament {
   final String userId,
       nomMedicament,
+      formPharmacetique,
       datDebut,
-      duree,
+      dateFin,
       momentPrise,
       horairePrise;
 
   Medicament(
       {this.userId,
       this.nomMedicament,
+      this.formPharmacetique,
       this.datDebut,
-      this.duree,
+      this.dateFin,
       this.momentPrise,
       this.horairePrise});
   Map<String, dynamic> toMap() {
@@ -18,9 +20,10 @@ class Medicament {
       "userId": this.userId,
       "nomMedicament": this.nomMedicament,
       "datDebut": this.datDebut,
-      "duree": this.duree,
+      "dateFin": this.dateFin,
       "momentPrise": this.momentPrise,
-      "horairePrise": this.horairePrise
+      "horairePrise": this.horairePrise,
+      "formPharmacetique,": this.formPharmacetique
     };
   }
 }

@@ -23,9 +23,9 @@ class HeaderLogo extends StatelessWidget {
             width: 12,
           ),
           Text(
-            'medical',
+            'CancerHelp',
             style: TextStyle(
-                fontSize: 38,
+                fontSize: 30,
                 color: mTitleTextColor,
                 fontWeight: FontWeight.bold),
           ),

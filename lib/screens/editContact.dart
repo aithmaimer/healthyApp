@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:healthy_app/classes/contact.dart';
-
 import 'package:healthy_app/screens/listContacts.dart';
 
 class EditContact extends StatefulWidget {
