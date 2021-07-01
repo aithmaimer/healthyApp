@@ -113,7 +113,7 @@ class _AcueilState extends State<Acueil> {
                                   imageUrl: 'images/medicament.jpg',
                                   title: 'Medicament',
                                   press: () {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>

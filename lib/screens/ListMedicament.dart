@@ -55,7 +55,7 @@ class _ListMedicamentState extends State<ListMedicament> {
                   return Card(
                     child: new ListTile(
                       onTap: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => ShowMedicament(document),

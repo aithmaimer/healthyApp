@@ -88,7 +88,7 @@ class ShowMedicamentState extends State<ShowMedicament> {
             ),
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                  MaterialPageRoute(builder: (context) => ListMedicament()));
             },
           )),
       body: Container(
