@@ -5,6 +5,8 @@ import 'package:healthy_app/screens/editContact.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'HomePage.dart';
+
 class ListContact extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -45,6 +47,16 @@ class ListContactState extends State<ListContact> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => WelcomeScreen()));
+          },
+        ),
         title: Text('My Contacts '),
         actions: <Widget>[
           IconButton(
