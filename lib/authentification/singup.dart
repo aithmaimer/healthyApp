@@ -287,7 +287,7 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
                                       hintText:
                                           "Date Naissance: ${_dateTime.day}/${_dateTime.month}/${_dateTime.year}",
                                       hintStyle: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 16,
                                           color: Colors.white,
                                           height: 1.5),
                                       prefixIcon: Icon(

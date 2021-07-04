@@ -50,11 +50,11 @@ class MedicamentPageState extends State<MedicamentPage> {
     });
   }
 
-  Future<void> insertData(final contacts) async {
+  Future<void> insertData(final medicaments) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore
         .collection("Medicament")
-        .add(contacts)
+        .add(medicaments)
         .then((DocumentReference document) {})
         .catchError((e) {
       print(e);
@@ -85,6 +85,16 @@ class MedicamentPageState extends State<MedicamentPage> {
     return Scaffold(
       appBar: AppBar(
           title: Text('Medicament'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ListMedicament();
+                }));
+              },
+            ),
+          ],
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
