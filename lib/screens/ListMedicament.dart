@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_app/classes/MedicamentPage.dart';
+import 'package:healthy_app/screens/HomePage.dart';
 import 'package:healthy_app/screens/showMedicament.dart';
 
 class ListMedicament extends StatefulWidget {
@@ -27,6 +28,16 @@ class _ListMedicamentState extends State<ListMedicament> {
         .where('userId', isEqualTo: user.uid);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => WelcomeScreen()));
+          },
+        ),
         title: Text('Medicament'),
         actions: <Widget>[
           IconButton(

@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:healthy_app/aide/profile/size_cofig.dart';
+import 'package:healthy_app/classes/MedicamentPage.dart';
+import 'package:healthy_app/screens/HomePage.dart';
 import '../constant.dart';
 import 'body.dart';
 
@@ -25,6 +27,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return WelcomeScreen();
+              }));
+            },
+          ),
           backgroundColor: mPrimaryTextColor,
           centerTitle: true,
           elevation: 0,

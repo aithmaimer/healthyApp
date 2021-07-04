@@ -85,16 +85,6 @@ class MedicamentPageState extends State<MedicamentPage> {
     return Scaffold(
       appBar: AppBar(
           title: Text('Medicament'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ListMedicament();
-                }));
-              },
-            ),
-          ],
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -102,7 +92,7 @@ class MedicamentPageState extends State<MedicamentPage> {
             ),
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                  MaterialPageRoute(builder: (context) => ListMedicament()));
             },
           )),
       body: Container(
